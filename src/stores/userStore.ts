@@ -31,6 +31,21 @@ export const useUserStore = defineStore('user', {
       } finally {
         this.isLoading = false
       }
-    }
+    },
+
+    addUser(newUser: User) {
+      this.users.push(newUser)
+    },
+
+    editUser(user: User) {
+      const index = this.users.findIndex(u => u.id === user.id)
+      if (index !== -1) {
+        this.users[index] = user
+      }
+    },
+
+    deleteUser(userId: number) {
+      this.users = this.users.filter(user => user.id !== userId)
+    },
   }
 })

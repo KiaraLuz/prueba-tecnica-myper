@@ -11,22 +11,22 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: 'name',
-    header: () => h('div', {}, 'Name'),
+    header: () => h('div', {}, 'Nombre'),
     cell: ({ row }) => h('div', {}, row.getValue('name')),
   },
   {
     accessorKey: 'username',
-    header: () => h('div', {}, 'Username'),
+    header: () => h('div', {}, 'Nombre de usuario'),
     cell: ({ row }) => h('div', {}, row.getValue('username')),
   },
   {
     accessorKey: 'email',
-    header: () => h('div', {}, 'Email'),
+    header: () => h('div', {}, 'Correo electrónico'),
     cell: ({ row }) => h('div', {}, row.getValue('email')),
   },
   {
     accessorKey: 'phone',
-    header: () => h('div', {}, 'Phone'),
+    header: () => h('div', {}, 'Teléfono'),
     cell: ({ row }) => h('div', {}, row.getValue('phone')),
   },
   {
