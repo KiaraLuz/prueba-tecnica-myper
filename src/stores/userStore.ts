@@ -1,0 +1,36 @@
+import { defineStore } from 'pinia'
+import type { User } from '@/interfaces/User'
+
+export const useUserStore = defineStore('user', {
+  state: () => ({
+    users: [] as any[],
+    isLoading: false,
+    hasFetched: false,
+  }),
+  actions: {
+    async fetchUsers() {
+      if (this.hasFetched) return
+
+      this.isLoading = true
+      try {
+        const res = await fetch('https://jsonplaceholder.typicode.com/users')
+        if (!res.ok) throw new Error('Error al obtener usuarios')
+        
+        const data = await res.json()
+        this.users = data.map((user: any): User => ({
+          id: user.id,
+          name: user.name,
+          username: user.username,
+          email: user.email,
+          phone: user.phone,
+        }))
+        
+        this.hasFetched = true
+      } catch (error) {
+        console.error('Error al traer usuarios:', error)
+      } finally {
+        this.isLoading = false
+      }
+    }
+  }
+})
