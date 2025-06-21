@@ -4,13 +4,13 @@ import * as yup from "yup";
 import { toTypedSchema } from "@vee-validate/yup";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useUsers } from "@/composables/useUsers";
+import { useUserStore } from "@/stores/userStore";
 import { toast } from "vue-sonner";
 import { ref } from "vue";
 
 const emit = defineEmits(["close"]);
 
-const { userStore } = useUsers();
+const userStore = useUserStore();
 
 const schema = toTypedSchema(
   yup.object({

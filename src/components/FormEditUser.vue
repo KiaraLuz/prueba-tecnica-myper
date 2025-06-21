@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { toTypedSchema } from "@vee-validate/yup";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useUsers } from "@/composables/useUsers";
+import { useUserStore } from "@/stores/userStore";
 import { toast } from "vue-sonner";
 import { computed } from "vue";
 import type { User } from "@/interfaces/User";
@@ -34,7 +34,7 @@ const schema = toTypedSchema(
   })
 );
 
-const { userStore } = useUsers();
+const userStore = useUserStore();
 
 function handleEditUser(values: any) {
   try {

@@ -2,10 +2,11 @@
 import AddUser from "@/components/AddUser.vue";
 import Button from "@/components/ui/button/Button.vue";
 import DataTable from "@/components/users/data-table.vue";
-import { useUsers } from "@/composables/useUsers";
+import { useUserStore } from "@/stores/userStore";
 import { storeToRefs } from "pinia";
 
-const { userStore } = useUsers();
+const userStore = useUserStore();
+
 const { users, isLoading } = storeToRefs(userStore);
 </script>
 
