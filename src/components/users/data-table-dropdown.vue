@@ -10,20 +10,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import EditUser from "@/components/EditUser.vue";
+import type { User } from "@/interfaces/User";
 
 defineProps<{
-  user: {
-    id: number;
-    name: string;
-    username: string;
-    email: string;
-    phone: string;
-  };
+  user: User;
 }>();
-
-function copy(id: string) {
-  navigator.clipboard.writeText(id);
-}
 </script>
 
 <template>

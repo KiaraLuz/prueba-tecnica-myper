@@ -103,7 +103,7 @@ const table = useVueTable({
       </TableBody>
     </Table>
 
-    <div class="flex items-center justify-end py-4 space-x-2">
+    <div class="flex items-center justify-end space-x-2">
       <Button
         variant="ghost"
         size="sm"

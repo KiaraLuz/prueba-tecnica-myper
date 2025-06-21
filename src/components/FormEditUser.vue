@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import { toTypedSchema } from "@vee-validate/yup";
@@ -7,8 +7,11 @@ import { Button } from "@/components/ui/button";
 import { useUsers } from "@/composables/useUsers";
 import { toast } from "vue-sonner";
 import { computed } from "vue";
+import type { User } from "@/interfaces/User";
 
-const props = defineProps();
+const props = defineProps<{
+  user: User;
+}>();
 
 const initialValues = computed(() => ({
   name: props.user.name,
@@ -33,7 +36,7 @@ const schema = toTypedSchema(
 
 const { userStore } = useUsers();
 
-function handleEditUser(values) {
+function handleEditUser(values: any) {
   try {
     userStore.editUser({
       id: props.user.id,

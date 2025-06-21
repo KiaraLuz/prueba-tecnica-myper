@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 import {
   Dialog,
@@ -8,10 +8,12 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import FormEditUser from "./FormEditUser.vue";
+import type { User } from "@/interfaces/User";
 
-const props = defineProps();
+const props = defineProps<{
+  user: User;
+}>();
 
 const dialogOpen = ref(false);
 </script>
@@ -30,7 +32,7 @@ const dialogOpen = ref(false);
         <DialogDescription>Edita los datos del usuario</DialogDescription>
       </DialogHeader>
 
-      <FormEditUser :user="props.user" @close="dialogOpen = false" />
+      <FormEditUser v-if="user" :user="user" @close="dialogOpen = false" />
     </DialogContent>
   </Dialog>
 </template>
