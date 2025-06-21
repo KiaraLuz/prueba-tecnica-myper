@@ -6,7 +6,7 @@ import DefaultLayout from "@/layout/DefaultLayout.vue";
 
 <template>
   <div>
-    <Toaster />
+    <Toaster class="pointer-events-auto" />
     <DefaultLayout>
       <RouterView />
     </DefaultLayout>

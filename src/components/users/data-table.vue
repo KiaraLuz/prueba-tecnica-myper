@@ -1,8 +1,16 @@
 <script setup lang="ts">
+import { ref, watch } from "vue";
 import type { User } from "./columns";
 import { columns } from "./columns";
-import { getCoreRowModel, useVueTable, FlexRender } from "@tanstack/vue-table";
-
+import {
+  getPaginationRowModel,
+  getCoreRowModel,
+  useVueTable,
+  FlexRender,
+  getFilteredRowModel,
+  ColumnFilter,
+  ColumnFiltersState,
+} from "@tanstack/vue-table";
 import {
   Table,
   TableBody,
@@ -11,24 +19,54 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
+import { Button } from "../ui/button";
+import { Input } from "@/components/ui/input";
+import { valueUpdater } from "@/lib/utils";
 
 const props = defineProps<{
   users: User[];
 }>();
 
+const columnFilters = ref<ColumnFiltersState>([]);
+const tableData = ref<User[]>([...props.users]);
+
+watch(
+  () => props.users,
+  (newUsers) => {
+    tableData.value = [...newUsers];
+  },
+  { immediate: true, deep: true }
+);
+
 const table = useVueTable({
   get data() {
-    return props.users;
+    return tableData.value;
   },
   get columns() {
     return columns;
   },
   getCoreRowModel: getCoreRowModel(),
+  getPaginationRowModel: getPaginationRowModel(),
+  onColumnFiltersChange: (updaterOrValue) =>
+    valueUpdater(updaterOrValue, columnFilters),
+  getFilteredRowModel: getFilteredRowModel(),
+  state: {
+    get columnFilters() {
+      return columnFilters.value;
+    },
+  },
 });
 </script>
 
 <template>
-  <div class="rounded-md bg-card">
+  <div class="rounded-md bg-card flex flex-col gap-4">
+    <Input
+      class="max-w-sm"
+      placeholder="Buscar nombre..."
+      :model-value="table.getColumn('name')?.getFilterValue() as string"
+      @update:model-value="table.getColumn('name')?.setFilterValue($event)"
+    />
+
     <Table>
       <TableHeader>
         <TableRow
@@ -64,5 +102,24 @@ const table = useVueTable({
         </template>
       </TableBody>
     </Table>
+
+    <div class="flex items-center justify-end py-4 space-x-2">
+      <Button
+        variant="ghost"
+        size="sm"
+        :disabled="!table.getCanPreviousPage()"
+        @click="table.previousPage()"
+      >
+        Anterior
+      </Button>
+      <Button
+        variant="outline"
+        size="sm"
+        :disabled="!table.getCanNextPage()"
+        @click="table.nextPage()"
+      >
+        Siguiente
+      </Button>
+    </div>
   </div>
 </template>
