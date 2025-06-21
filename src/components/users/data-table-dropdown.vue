@@ -9,6 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import EditUser from "@/components/EditUser.vue";
 
 defineProps<{
   user: {
@@ -36,7 +37,7 @@ function copy(id: string) {
     <DropdownMenuContent align="end">
       <DropdownMenuLabel>Acciones</DropdownMenuLabel>
       <DropdownMenuSeparator />
-      <DropdownMenuItem>Editar</DropdownMenuItem>
+      <EditUser :user="user" />
       <DropdownMenuItem>Eliminar</DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>

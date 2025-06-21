@@ -6,11 +6,18 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useUsers } from "@/composables/useUsers";
 import { toast } from "vue-sonner";
-import { ref } from "vue";
+import { computed } from "vue";
+
+const props = defineProps();
+
+const initialValues = computed(() => ({
+  name: props.user.name,
+  username: props.user.username,
+  email: props.user.email,
+  phone: props.user.phone,
+}));
 
 const emit = defineEmits(["close"]);
-
-const { userStore } = useUsers();
 
 const schema = toTypedSchema(
   yup.object({
@@ -24,23 +31,20 @@ const schema = toTypedSchema(
   })
 );
 
-function handleAddUser(values) {
-  const lastId = userStore.users.length
-    ? Math.max(...userStore.users.map((u) => u.id))
-    : 0;
+const { userStore } = useUsers();
 
-  const newUser = {
-    id: lastId + 1,
-    ...values,
-  };
-
+function handleEditUser(values) {
   try {
-    userStore.addUser(newUser);
-    toast("Usuario añadido correctamente", {
-      description: `${values.name} fue agregado`,
+    userStore.editUser({
+      id: props.user.id,
+      ...values,
     });
-  } catch (error) {
-    toast.error("Error al agregar usuario");
+
+    toast("Usuario actualizado", {
+      description: `${values.name} fue editado correctamente`,
+    });
+  } catch (err) {
+    toast.error("Error al editar usuario");
   } finally {
     emit("close");
   }
@@ -48,12 +52,21 @@ function handleAddUser(values) {
 </script>
 
 <template>
-  <Form :validation-schema="schema" @submit="handleAddUser">
+  <Form
+    :validation-schema="schema"
+    :initial-values="initialValues"
+    @submit="handleEditUser"
+    class="grid gap-4"
+  >
     <div class="grid gap-4">
       <div class="grid gap-1">
         <label>Nombre</label>
         <Field name="name" v-slot="{ field }">
-          <Input v-bind="field" />
+          <Input
+            v-bind="field"
+            :value="field.value"
+            @input="field.value = $event.target.value"
+          />
         </Field>
         <ErrorMessage name="name" class="text-destructive text-sm" />
       </div>
@@ -61,7 +74,11 @@ function handleAddUser(values) {
       <div class="grid gap-1">
         <label>Nombre de usuario</label>
         <Field name="username" v-slot="{ field }">
-          <Input v-bind="field" />
+          <Input
+            v-bind="field"
+            :value="field.value"
+            @input="field.value = $event.target.value"
+          />
         </Field>
         <ErrorMessage name="username" class="text-destructive text-sm" />
       </div>
@@ -69,7 +86,11 @@ function handleAddUser(values) {
       <div class="grid gap-1">
         <label>Correo electrónico</label>
         <Field name="email" v-slot="{ field }">
-          <Input v-bind="field" />
+          <Input
+            v-bind="field"
+            :value="field.value"
+            @input="field.value = $event.target.value"
+          />
         </Field>
         <ErrorMessage name="email" class="text-destructive text-sm" />
       </div>
@@ -77,18 +98,22 @@ function handleAddUser(values) {
       <div class="grid gap-1">
         <label>Teléfono</label>
         <Field name="phone" v-slot="{ field }">
-          <Input v-bind="field" />
+          <Input
+            v-bind="field"
+            :value="field.value"
+            @input="field.value = $event.target.value"
+          />
         </Field>
         <ErrorMessage name="phone" class="text-destructive text-sm" />
       </div>
     </div>
 
     <div class="sm:justify-end flex gap-2 pt-4">
-      <Button type="submit" class="w-auto">Añadir</Button>
+      <Button type="submit" class="w-auto">Guardar</Button>
       <Button
+        type="button"
         variant="ghost"
         class="w-auto"
-        type="button"
         @click="emit('close')"
         >Cancelar</Button
       >
