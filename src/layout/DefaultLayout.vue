@@ -8,7 +8,7 @@
       CRUD de Usuarios con Vue.js
     </header>
 
-    <main class="w-full max-w-4xl mx-auto px-4 py-6">
+    <main class="w-full max-w-4xl mx-auto">
       <slot />
     </main>
   </div>

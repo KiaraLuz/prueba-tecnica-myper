@@ -24,7 +24,6 @@ export const useUserStore = defineStore('user', {
           email: user.email,
           phone: user.phone,
         }))
-        
         this.hasFetched = true
       } catch (error) {
         console.error('Error al traer usuarios:', error)

@@ -6,7 +6,6 @@ import { useUserStore } from "@/stores/userStore";
 import { storeToRefs } from "pinia";
 
 const userStore = useUserStore();
-
 const { users, isLoading } = storeToRefs(userStore);
 </script>
 

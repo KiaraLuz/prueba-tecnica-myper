@@ -11,11 +11,11 @@ import {
 import FormEditUser from "./FormEditUser.vue";
 import type { User } from "@/interfaces/User";
 
+const dialogOpen = ref(false);
+
 const props = defineProps<{
   user: User;
 }>();
-
-const dialogOpen = ref(false);
 </script>
 
 <template>

@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import EditUser from "@/components/EditUser.vue";
+import DeleteUser from "@/components/DeleteUser.vue";
 import type { User } from "@/interfaces/User";
 
 defineProps<{
@@ -21,7 +22,6 @@ defineProps<{
   <DropdownMenu>
     <DropdownMenuTrigger as-child>
       <Button variant="ghost" class="w-8 h-8 p-0">
-        <span class="sr-only">Open menu</span>
         <MoreHorizontal class="w-4 h-4" />
       </Button>
     </DropdownMenuTrigger>
@@ -29,7 +29,7 @@ defineProps<{
       <DropdownMenuLabel>Acciones</DropdownMenuLabel>
       <DropdownMenuSeparator />
       <EditUser :user="user" />
-      <DropdownMenuItem>Eliminar</DropdownMenuItem>
+      <DeleteUser :user="user" />
     </DropdownMenuContent>
   </DropdownMenu>
 </template>

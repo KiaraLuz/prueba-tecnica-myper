@@ -8,9 +8,8 @@ import { useUserStore } from "@/stores/userStore";
 import { toast } from "vue-sonner";
 import { ref } from "vue";
 
-const emit = defineEmits(["close"]);
-
 const userStore = useUserStore();
+const emit = defineEmits(["close"]);
 
 const schema = toTypedSchema(
   yup.object({
@@ -48,7 +47,7 @@ function handleAddUser(values) {
 </script>
 
 <template>
-  <Form :validation-schema="schema" @submit="handleAddUser">
+  <Form :validation-schema="schema" @submit="handleAddUser" class="grid gap-4">
     <div class="grid gap-4">
       <div class="grid gap-1">
         <label>Nombre</label>
@@ -83,7 +82,7 @@ function handleAddUser(values) {
       </div>
     </div>
 
-    <div class="sm:justify-end flex gap-2 pt-4">
+    <div class="sm:justify-end flex gap-2">
       <Button type="submit" class="w-auto">Añadir</Button>
       <Button
         variant="ghost"

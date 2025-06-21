@@ -9,6 +9,9 @@ import { toast } from "vue-sonner";
 import { computed } from "vue";
 import type { User } from "@/interfaces/User";
 
+const userStore = useUserStore();
+const emit = defineEmits(["close"]);
+
 const props = defineProps<{
   user: User;
 }>();
@@ -19,8 +22,6 @@ const initialValues = computed(() => ({
   email: props.user.email,
   phone: props.user.phone,
 }));
-
-const emit = defineEmits(["close"]);
 
 const schema = toTypedSchema(
   yup.object({
@@ -33,8 +34,6 @@ const schema = toTypedSchema(
       .required("Campo obligatorio"),
   })
 );
-
-const userStore = useUserStore();
 
 function handleEditUser(values: any) {
   try {
