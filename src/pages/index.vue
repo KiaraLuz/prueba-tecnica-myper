@@ -1,11 +1,12 @@
 <script setup>
 import AddUser from "@/components/AddUser.vue";
-import Loading from "@/components/Loading.vue";
 import Button from "@/components/ui/button/Button.vue";
 import DataTable from "@/components/users/data-table.vue";
 import { useUsers } from "@/composables/useUsers";
+import { storeToRefs } from "pinia";
 
 const { userStore } = useUsers();
+const { users, isLoading } = storeToRefs(userStore);
 </script>
 
 <template>
@@ -14,12 +15,9 @@ const { userStore } = useUsers();
   >
     <h1 class="text-xl font-bold">Listado de Usuarios</h1>
     <AddUser />
-    <div v-if="userStore.isLoading">
-      <Loading />
-    </div>
 
-    <div v-else class="overflow-x-auto">
-      <DataTable :users="userStore.users" />
+    <div class="overflow-x-auto">
+      <DataTable :users="users" :loading="isLoading" />
     </div>
   </div>
 </template>

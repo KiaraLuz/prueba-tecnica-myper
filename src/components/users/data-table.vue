@@ -22,9 +22,11 @@ import {
 import { Button } from "../ui/button";
 import { Input } from "@/components/ui/input";
 import { valueUpdater } from "@/lib/utils";
+import Loading from "./Loading.vue";
 
 const props = defineProps<{
   users: User[];
+  loading: boolean;
 }>();
 
 const columnFilters = ref<ColumnFiltersState>([]);
@@ -83,7 +85,7 @@ const table = useVueTable({
         </TableRow>
       </TableHeader>
       <TableBody>
-        <template v-if="table.getRowModel().rows?.length">
+        <template v-if="table.getRowModel().rows?.length && !loading">
           <TableRow v-for="row in table.getRowModel().rows" :key="row.id">
             <TableCell v-for="cell in row.getVisibleCells()" :key="cell.id">
               <FlexRender
@@ -92,6 +94,9 @@ const table = useVueTable({
               />
             </TableCell>
           </TableRow>
+        </template>
+        <template v-else-if="loading">
+          <Loading />
         </template>
         <template v-else>
           <TableRow>
