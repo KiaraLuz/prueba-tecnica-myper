@@ -42,7 +42,7 @@ function handleDeleteUser(values: any) {
         >Eliminar</span
       ></DialogTrigger
     >
-    <DialogContent class="sm:max-w-md">
+    <DialogContent class="sm:max-w-md text-foreground border-0">
       <DialogHeader>
         <DialogTitle>Eliminar Usuario</DialogTitle>
         <DialogDescription
@@ -51,7 +51,12 @@ function handleDeleteUser(values: any) {
       </DialogHeader>
 
       <div class="sm:justify-end flex gap-2">
-        <Button @click="handleDeleteUser(user)" class="w-auto">Eliminar</Button>
+        <Button
+          @click="handleDeleteUser(user)"
+          class="w-auto"
+          variant="destructive"
+          >Eliminar</Button
+        >
         <Button variant="ghost" @click="dialogOpen = false" class="w-auto"
           >Cancelar</Button
         >

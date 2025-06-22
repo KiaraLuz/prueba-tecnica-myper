@@ -19,10 +19,10 @@ const dialogOpen = ref(false);
     <DialogTrigger as-child>
       <Button variant="default" class="self-start">Añadir</Button>
     </DialogTrigger>
-    <DialogContent class="sm:max-w-md">
+    <DialogContent class="sm:max-w-md text-foreground border-0">
       <DialogHeader>
         <DialogTitle>Añadir Usuario</DialogTitle>
-        <DialogDescription> Añade un usuario a la tabla </DialogDescription>
+        <DialogDescription>Añade un usuario a la tabla</DialogDescription>
       </DialogHeader>
 
       <FormAddUser @close="dialogOpen = false" />

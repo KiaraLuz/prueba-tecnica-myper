@@ -27,7 +27,7 @@ const { user } = props;
         >Editar</span
       ></DialogTrigger
     >
-    <DialogContent class="sm:max-w-md">
+    <DialogContent class="sm:max-w-md text-foreground border-0">
       <DialogHeader>
         <DialogTitle>Editar Usuario</DialogTitle>
         <DialogDescription>Edita los datos del usuario</DialogDescription>
