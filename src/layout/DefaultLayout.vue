@@ -1,11 +1,19 @@
+<script setup lang="ts">
+import ToogleTheme from "@/components/ToogleTheme.vue";
+</script>
 <template>
   <div
     class="flex flex-col bg-background text-foreground min-h-screen w-full font-sans"
   >
     <header
-      class="flex w-full text-2xl p-4 items-center justify-center border-b-2 border-border font-bold uppercase text-center bg-card"
+      class="relative flex justify-between items-center md:justify-center w-full p-4 border-b-2 border-border bg-card"
     >
-      CRUD de Usuarios con Vue.js
+      <span
+        class="font-bold uppercase text-lg md:text-2xl text-left md:text-center"
+      >
+        CRUD de Usuarios con Vue.js
+      </span>
+      <ToogleTheme />
     </header>
 
     <main class="w-full max-w-4xl mx-auto">
