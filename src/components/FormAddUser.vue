@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import { toTypedSchema } from "@vee-validate/yup";
@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useUserStore } from "@/stores/userStore";
 import { toast } from "vue-sonner";
-import { ref } from "vue";
 
 const userStore = useUserStore();
 const emit = defineEmits(["close"]);
@@ -23,7 +22,7 @@ const schema = toTypedSchema(
   })
 );
 
-function handleAddUser(values) {
+function handleAddUser(values: any) {
   const lastId = userStore.users.length
     ? Math.max(...userStore.users.map((u) => u.id))
     : 0;

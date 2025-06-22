@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import type { User } from "./columns";
+import type { User } from "@/interfaces/User";
 import { columns } from "./columns";
 import {
   getPaginationRowModel,
@@ -8,8 +8,7 @@ import {
   useVueTable,
   FlexRender,
   getFilteredRowModel,
-  ColumnFilter,
-  ColumnFiltersState,
+  type ColumnFiltersState,
 } from "@tanstack/vue-table";
 import {
   Table,

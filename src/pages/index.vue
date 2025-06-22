@@ -1,6 +1,5 @@
 <script setup>
 import AddUser from "@/components/AddUser.vue";
-import Button from "@/components/ui/button/Button.vue";
 import DataTable from "@/components/users/data-table.vue";
 import { useUserStore } from "@/stores/userStore";
 import { storeToRefs } from "pinia";

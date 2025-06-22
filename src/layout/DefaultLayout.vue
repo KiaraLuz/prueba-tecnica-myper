@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import ToogleTheme from "@/components/ToogleTheme.vue";
 </script>
 <template>

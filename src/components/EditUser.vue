@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import type { User } from "@/interfaces/User";
 import {
   Dialog,
   DialogTrigger,
@@ -9,13 +10,13 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import FormEditUser from "./FormEditUser.vue";
-import type { User } from "@/interfaces/User";
 
 const dialogOpen = ref(false);
 
 const props = defineProps<{
   user: User;
 }>();
+const { user } = props;
 </script>
 
 <template>
